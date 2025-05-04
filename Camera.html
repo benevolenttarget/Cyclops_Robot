@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>Camera</title></head>
+<body>
+  <h2>Camera Feed</h2>
+  <img id="cam" src="/capture" width="160"><br>
+  <button onclick="document.getElementById('cam').src='/capture?rand=' + Math.random()">Capture Image</button>
+  <p id="status" style="color:red; font-weight:bold;"></p>
+  <script>
+    setInterval(() => {
+      fetch('/radar-status')
+        .then(res => res.text())
+        .then(text => {
+          if (text.includes("Detected")) {
+            document.getElementById('status').innerText = text;
+          } else {
+            document.getElementById('status').innerText = "";
+          }
+        });
+    }, 1000);
+  </script>
+</body>
+</html>
