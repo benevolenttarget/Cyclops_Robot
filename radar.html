@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Radar</title></head>
+<body>
+  <h2>Radar Detection</h2>
+  <p id="motion">Checking...</p>
+  <script>
+    setInterval(() => {
+      fetch('/radar-status')
+        .then(res => res.text())
+        .then(text => {
+          document.getElementById('motion').innerText = text;
+        });
+    }, 1000);
+  </script>
+</body>
+</html>
